@@ -4,7 +4,6 @@ mod tests;
 
 use config::EXTENSIONS;
 use rand::Rng;
-use self_update::cargo_crate_version;
 use std::{
     collections::HashMap,
     ffi::OsStr,
@@ -191,21 +190,6 @@ pub fn sort_files(
         }
     }
 
-    Ok(())
-}
-
-pub fn update_filesorterx() -> Result<(), Box<dyn (std::error::Error)>> {
-    println!("Updating FileSorterX to the latest version...");
-
-    let status = self_update::backends::github::Update::configure()
-        .repo_owner("xanthus58")
-        .repo_name("FileSorterX")
-        .bin_name("github")
-        .show_download_progress(true)
-        .current_version(cargo_crate_version!())
-        .build()?
-        .update()?;
-    println!("Update status: `{}`!", status.version());
     Ok(())
 }
 

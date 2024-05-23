@@ -9,13 +9,10 @@ use std::{
     time::{Duration, SystemTime},
 };
 use uuid::*;
-use FileSorterX::*;
+use filesort::*;
 
 /*
-Made by Xanthus
-Check out my other works at https://github.com/Xanthus58
-Email me at 'business@xanthus.uk'
-You can see more information on my website https://xanthus.uk
+
 */
 
 #[derive(Parser)]
@@ -82,8 +79,6 @@ enum Commands {
         #[arg(short, long, default_value_t = false)]
         log: bool,
     },
-    /// Updates FileSorterX to the latest version based on the github repo
-    Update {},
     /// Note: Only run in a new empty directory. Runs a benchmark test
     Benchmark {},
 }
@@ -145,24 +140,6 @@ fn main() {
             //     );
             // }
         }
-        Some(Commands::Update { .. }) => {
-            update_filesorterx().expect("Failed to update FileSorterX");
-
-            // if !cli.disable_telemetry {
-            //     collect_telemetry(
-            //         "N/A".to_string(),
-            //         "N/A".to_string(),
-            //         "N/A",
-            //         "N/A",
-            //         "N/A",
-            //         "N/A",
-            //         "N/A".to_string(),
-            //         "N/A",
-            //         "Update",
-            //         Duration::from_secs(0),
-            //     );
-            // }
-        }
         Some(Commands::Benchmark { .. }) => {
             let time = benchmark();
             println!("Time Taken: {:?}", time);
@@ -181,63 +158,6 @@ fn main() {
                 );
             }
         }
-        None => println!("No command provided. Use 'filesorterx --help' for more information."),
+        None => println!("No command provided. Use 'filesort --help' for more information."),
     }
 }
-
-// fn collect_telemetry(
-//     inputdir: String,
-//     outputdir: String,
-//     nesting_level: &str,
-//     use_alt: &str,
-//     verbose: &str,
-//     log: &str,
-//     extension: String,
-//     amount: &str,
-//     cmd: &str,
-//     time: Duration,
-// ) {
-//     let id = Uuid::new_v4();
-//     let os = env::consts::OS;
-//     let token = dotenv!("TELEMETRY_TOKEN");
-//     let mut command = String::new();
-
-//     command.push_str("'UUID: ");
-//     command.push_str(&id.to_string());
-//     command.push_str(" | OS: ");
-//     command.push_str(os);
-//     command.push_str(" | Command: ");
-//     command.push_str(cmd);
-//     command.push_str(" | Inputdir: ");
-//     command.push_str(&inputdir);
-//     command.push_str(" | OutputDir: ");
-//     command.push_str(&outputdir);
-//     command.push_str(" | Nesting Level: ");
-//     command.push_str(nesting_level);
-//     command.push_str(" | Use Alt: ");
-//     command.push_str(use_alt);
-//     command.push_str(" | Verbose: ");
-//     command.push_str(verbose);
-//     command.push_str(" | Logging: ");
-//     command.push_str(log);
-//     command.push_str(" | Extension: ");
-//     command.push_str(&extension);
-//     command.push_str(" | Amount: ");
-//     command.push_str(amount);
-//     command.push_str(" | Time Taken: ");
-//     command.push_str(&time.as_secs_f64().to_string());
-//     command.push_str(" | FileSorterX Version: ");
-//     command.push_str(env!("CARGO_PKG_VERSION"));
-//     command.push('\'');
-
-//     Command::new("curl")
-//         .arg("-A")
-//         .arg(command)
-//         .arg(token)
-//         .arg("-k")
-//         .output()
-//         .expect("Failed to execute command");
-
-//     println!("Telemetry ID: {}", id);
-//     println!("Pleaes use this ID when reporting any issues.");
-// }
