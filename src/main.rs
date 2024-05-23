@@ -8,7 +8,6 @@ use std::{
     process::Command,
     time::{Duration, SystemTime},
 };
-use uuid::*;
 use filesort::*;
 
 /*
