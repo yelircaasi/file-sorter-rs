@@ -143,20 +143,6 @@ fn main() {
         Some(Commands::Benchmark { .. }) => {
             let time = benchmark();
             println!("Time Taken: {:?}", time);
-            if !cli.disable_telemetry {
-                collect_telemetry(
-                    "N/A".to_string(),
-                    "N/A".to_string(),
-                    "N/A",
-                    "N/A",
-                    "N/A",
-                    "N/A",
-                    "N/A".to_string(),
-                    "N/A",
-                    "Benchmark",
-                    time,
-                );
-            }
         }
         None => println!("No command provided. Use 'filesort --help' for more information."),
     }
