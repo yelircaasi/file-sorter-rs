@@ -1,5 +1,5 @@
 [package]
-name = "file_sorter_rs"
+name = "filesort"
 version = "1.2.2"
 edition = "2021"
 authors = ["yelircaasi <isaac.r.riley@gmail.com"]
